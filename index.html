@@ -156,6 +156,7 @@
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
     <script>
+        const appid = 'place_your_api_key_here'; // use your own API key here
         function dateFormat(timestamp) {
             const date = new Date(timestamp * 1000); // Multiply by 1000 to convert from seconds to milliseconds
             return date.toLocaleString();// Convert to local time format and return it
@@ -163,7 +164,7 @@
 
 
         async function fetchAQIData(lat, lon) {
-            let fetchAQIData = await fetch(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=592f88e690e825e9040d8530abf34bab`)
+            let fetchAQIData = await fetch(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${appid}`)
             let formattedData = await fetchAQIData.json();
             console.log('AQI Data: ', formattedData);
             let list = formattedData.list[0].components;
@@ -181,7 +182,7 @@
 
         async function nextFiveDays(lat, lon) {
 
-            const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=592f88e690e825e9040d8530abf34bab&units=metric`;
+            const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${appid}&units=metric`;
             try {
                 const response = await fetch(apiUrl);
                 if (!response.ok) {
@@ -228,7 +229,7 @@
         }
 
         async function todayTemps(lat, lon) {
-            const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=592f88e690e825e9040d8530abf34bab&units=metric`;
+            const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${appid}&units=metric`;
 
             try {
                 const response = await fetch(apiUrl);
@@ -269,7 +270,7 @@
         async function fetchData() {
 
             let cityName = document.getElementsByClassName('inputfield')[0].value;
-            let requestData = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=592f88e690e825e9040d8530abf34bab&units=metric`);
+            let requestData = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${appid}&units=metric`);
             let formattedData = await requestData.json();
             console.log("Formatted Data: ", formattedData);
 
